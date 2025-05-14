@@ -1,23 +1,23 @@
-# Документация API слоя
+# API Layer Documentation
 
-API слой в Репозитории служит основной точкой входа для всех событийно-ориентированных операций. Построенный на FastAPI, этот слой преобразует входящие HTTP запросы в события, которые проходят через событийно-ориентированную архитектуру системы.
+The API layer in the Repository serves as the main entry point for all event-driven operations. Built on FastAPI, this layer transforms incoming HTTP requests into events that flow through the system's event-driven architecture.
 
-## Архитектурный обзор
+## Architectural Overview
 
-API слой реализует паттерн "прием-и-делегирование", где запросы быстро валидируются, сохраняются и делегируются фоновым обработчикам. Такой дизайн обеспечивает высокую доступность и отзывчивость, так как API немедленно подтверждает валидные запросы, не дожидаясь полной обработки.
+The API layer implements the "receive-and-delegate" pattern, where requests are quickly validated, stored, and delegated to background handlers. This design ensures high availability and responsiveness, as the API immediately acknowledges valid requests without waiting for complete processing.
 
-Когда приходит запрос, он проходит через следующие этапы:
+When a request arrives, it goes through the following stages:
 
-1. FastAPI валидирует входящую нагрузку согласно определенным схемам
-2. Валидированное событие сохраняется в PostgreSQL
-3. Фоновая задача ставится в очередь через Celery
-4. API возвращает ответ 202 Accepted с идентификатором задачи
+1. FastAPI validates the incoming payload against defined schemas
+2. The validated event is stored in PostgreSQL
+3. A background task is queued via Celery
+4. The API returns a 202 Accepted response with the task identifier
 
-## Основные компоненты
+## Core Components
 
-### Зависимости (dependencies.py)
+### Dependencies (dependencies.py)
 
-Модуль зависимостей предоставляет основные сервисы для API эндпоинтов через систему внедрения зависимостей FastAPI. Основной зависимостью является менеджер сессий базы данных, который обеспечивает правильную обработку соединений с базой данных:
+The dependencies module provides core services for API endpoints through FastAPI's dependency injection system. The primary dependency is the database session manager, which ensures proper database connection handling:
 
 ```python
 def db_session() -> Generator:
@@ -31,21 +31,21 @@ def db_session() -> Generator:
     finally:
         session.close()
 ```
-Этот паттерн гарантирует правильное управление сессиями базы данных независимо от успеха или неудачи запроса.
+This pattern ensures proper database session management regardless of request success or failure.
 
-### Схема событий (event_schema.py)
+### Event Schema (event_schema.py)
 
-Схемы событий определяют контракт между API клиентами и системой. Используя Pydantic модели, мы обеспечиваем строгую валидацию входящих запросов до их поступления в pipeline обработки. Система схем расширяема, позволяя определять пользовательские правила валидации для различных типов событий.
+Event schemas define the contract between API clients and the system. Using Pydantic models, we ensure strict validation of incoming requests before they enter the processing pipeline. The schema system is extensible, allowing custom validation rules for different event types.
 
-#### Интеграция с Pydantic Model
+#### Pydantic Model Integration
 
-Pydantic модели служат основой для валидации и сериализации данных. Эти модели обеспечивают:
+Pydantic models serve as the foundation for data validation and serialization. These models provide:
 
-- Проверку типов и валидацию во время выполнения
-- Генерацию JSON схем для OpenAPI документации
-- Автоматическую сериализацию/десериализацию сложных типов данных
+- Runtime type checking and validation
+- JSON schema generation for OpenAPI documentation
+- Automatic serialization/deserialization of complex data types
 
-Пример типичной схемы события:
+Example of a typical event schema:
 
 ```python
 from pydantic import BaseModel, Field
@@ -66,13 +66,13 @@ class EventSchema(BaseModel):
         }
     }
 ```
-Для получения дополнительной информации о моделях Pydantic и их возможностях обратитесь к:
-- [Документация Pydantic](https://docs.pydantic.dev/)
-- [Руководство FastAPI по Pydantic](https://fastapi.tiangolo.com/tutorial/body/#using-pydantic-models)
+For more information about Pydantic models and their capabilities, refer to:
+- [Pydantic Documentation](https://docs.pydantic.dev/)
+- [FastAPI Pydantic Guide](https://fastapi.tiangolo.com/tutorial/body/#using-pydantic-models)
 
-### Эндпоинты (endpoint.py)
+### Endpoints (endpoint.py)
 
-Модуль эндпоинтов реализует базовую логику приема событий. Он следует принципам REST и реализует паттерн "accept-and-delegate":
+The endpoints module implements the basic event handling logic. It follows REST principles and implements the "accept-and-delegate" pattern:
 
 ```python
 @router.post("/")
@@ -94,30 +94,31 @@ def handle_event(
         status_code=HTTPStatus.ACCEPTED
     )
 ```
-### Конфигурация маршрутизатора (router.py)
 
-Модуль маршрутизатора организует эндпоинты в логические группы и применяет общие конфигурации. Такой модульный подход позволяет легко добавлять новые эндпоинты, сохраняя согласованные шаблоны маршрутизации.
+### Router Configuration (router.py)
 
-## Точки интеграции
+The router module organizes endpoints into logical groups and applies common configurations. This modular approach makes it easy to add new endpoints while maintaining consistent routing patterns.
 
-API слой интегрируется с несколькими другими компонентами системы:
+## Integration Points
 
-### Интеграция с базой данных
-Через паттерн репозитория, API слой сохраняет события, поддерживая разделение ответственности. Операции с базой данных абстрагированы за интерфейсами репозитория, что делает систему гибкой к изменениям базы данных.
+The API layer integrates with several other system components:
 
-### Интеграция с очередью задач
-API слой ставит задачи в очередь для фоновой обработки используя Celery. Эта точка интеграции критически важна для event-driven природы системы, позволяя асинхронно обрабатывать потенциально длительные операции.
+### Database Integration
+Through the repository pattern, the API layer stores events while maintaining separation of concerns. Database operations are abstracted behind repository interfaces, making the system flexible to database changes.
 
-### Интеграция валидации
-Система валидации FastAPI работает совместно с моделями Pydantic для обеспечения целостности данных до того, как события попадают в pipeline обработки.
+### Task Queue Integration
+The API layer queues tasks for background processing using Celery. This integration point is critical for the event-driven nature of the system, allowing asynchronous processing of potentially long-running operations.
 
-## Расширение API
+### Validation Integration
+The FastAPI validation system works together with Pydantic models to ensure data integrity before events enter the processing pipeline.
 
-Чтобы добавить новые эндпоинты, следуйте этим шагам:
+## Extending the API
 
-1. Определите новые схемы в event_schema.py
-2. Создайте обработчики эндпоинтов в endpoint.py
-3. При необходимости обновите конфигурацию маршрутизатора
-4. Реализуйте соответствующие обработчики pipeline
+To add new endpoints, follow these steps:
 
-Модульный дизайн делает расширение API простым, сохраняя при этом согласованность и надежность.
+1. Define new schemas in event_schema.py
+2. Create endpoint handlers in endpoint.py
+3. Update router configuration if needed
+4. Implement corresponding pipeline handlers
+
+The modular design makes API extension straightforward while maintaining consistency and reliability.

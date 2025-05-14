@@ -1,12 +1,12 @@
-# Дизайн и реализация Pipeline
+# Pipeline Design and Implementation
 
-Система pipeline в Репозитории предоставляет структурированный способ реализации AI рабочих процессов. Это руководство объясняет, как проектировать, реализовывать и регистрировать pipeline для обработки через систему Celery worker.
+The pipeline system in the Repository provides a structured way to implement AI workflows. This guide explains how to design, implement, and register pipelines for processing through the Celery worker system.
 
-## Архитектура Pipeline
+## Pipeline Architecture
 
-### Система Registry (registry.py)
+### Registry System (registry.py)
 
-PipelineRegistry действует как центральный хаб для управления различными реализациями pipeline:
+PipelineRegistry acts as a central hub for managing various pipeline implementations:
 
 ```python
 class PipelineRegistry:
@@ -22,17 +22,17 @@ class PipelineRegistry:
             return "support"
         return "content"
 ```
-Этот реестр:
+This registry:
 
-- Сопоставляет типы событий с конкретными реализациями pipeline
-- Обеспечивает динамический выбор pipeline на основе атрибутов события
-- Позволяет легко добавлять новые типы pipeline
+- Maps event types to specific pipeline implementations
+- Provides dynamic pipeline selection based on event attributes
+- Allows easy addition of new pipeline types
 
-## Создание Pipeline
+## Creating Pipelines
 
-### Базовая структура Pipeline
+### Basic Pipeline Structure
 
-Типичный pipeline состоит из нескольких узлов, организованных в направленный ациклический граф (DAG):
+A typical pipeline consists of several nodes organized in a Directed Acyclic Graph (DAG):
 
 ```python
 class ContentAnalysisPipeline(Pipeline):
@@ -54,9 +54,9 @@ class ContentAnalysisPipeline(Pipeline):
     )
 ```
 
-### Типы узлов и их реализация
+### Node Types and Implementation
 
-1. **Базовый узел обработки**:
+1. **Basic Processing Node**:
 ```python
 class ExtractNode(Node):
     def process(self, context: TaskContext) -> TaskContext:
@@ -66,7 +66,7 @@ class ExtractNode(Node):
         return context
 ```
 
-2. **LLM Узел**:
+2. **LLM Node**:
 ```python
 class AnalyzeNode(LLMNode):
     class ContextModel(BaseModel):
@@ -110,7 +110,7 @@ class AnalyzeNode(LLMNode):
         return task_context
 ```
 
-3. **Router Узел**:
+3. **Router Node**:
 ```python
 class ContentRouter(BaseRouter):
     def __init__(self):
@@ -127,9 +127,9 @@ class SummaryRoute(RouterNode):
         return None
 ```
 
-## Интеграция с Celery
+## Celery Integration
 
-Celery worker (tasks.py) обрабатывает выполнение pipeline:
+Celery worker (tasks.py) handles pipeline execution:
 
 ```python
 @celery_app.task(name="process_incoming_event")
@@ -147,11 +147,11 @@ def process_incoming_event(event_id: str):
         repository.update(event)
 ```
 
-## Лучшие практики проектирования Pipeline
+## Pipeline Design Best Practices
 
-### 1. Granularity узлов
+### 1. Node Granularity
 
-Создавайте узлы с одной ответственностью:
+Create nodes with single responsibility:
 ```python
 # Good: Focused node
 class SentimentNode(LLMNode):
@@ -168,7 +168,7 @@ class AnalysisNode(LLMNode):
 
 ### 2. Data Flow
 
-Сохраняйте четкое управление зависимостями:
+Maintain clear dependency management:
 ```python
 class SummarizeNode(LLMNode):
     def get_context(self, task_context: TaskContext) -> ContextModel:
@@ -179,9 +179,9 @@ class SummarizeNode(LLMNode):
         )
 ```
 
-### 3. Размещение Router
+### 3. Router Placement
 
-Размещайте маршрутизаторы в точках принятия решений:
+Place routers at decision points:
 ```python
 pipeline_schema = PipelineSchema(
     start=ValidateNode,
@@ -196,9 +196,9 @@ pipeline_schema = PipelineSchema(
 )
 ```
 
-### 4. Обработка ошибок
+### 4. Error Handling
 
-Реализуйте надежную обработку ошибок:
+Implement robust error handling:
 
 ```python
 class ProcessingNode(Node):
@@ -214,9 +214,9 @@ class ProcessingNode(Node):
         return context
 ```
 
-## Организация Pipeline
+## Pipeline Organization
 
-Организуйте ваш каталог pipelines:
+Organize your pipelines directory:
 ```
 pipelines/
 ├── __init__.py
@@ -231,9 +231,9 @@ pipelines/
     └── pipeline.py
 ```
 
-## Тестировочный Pipeline
+## Testing Pipeline
 
-Создайте комплексные тесты:
+Create comprehensive tests:
 ```python
 def test_content_pipeline():
     # Create test event
@@ -250,23 +250,23 @@ def test_content_pipeline():
     assert result.nodes["AnalyzeNode"]["sentiment"] == "positive"
 ```
 
-Помните, что хорошо спроектированные pipeline:
+Remember that well-designed pipelines are:
 
-- Легко понять
-- Поддерживаемы
-- Тестируемы
-- Переиспользуемы
-- Устойчивы к ошибкам
+- Easy to understand
+- Maintainable
+- Testable
+- Reusable
+- Error-resistant
 
-Система pipeline предоставляет структуру - ваша реализация предоставляет интеллект.
+The pipeline system provides the structure - your implementation provides the intelligence.
 
-## Стратегия Pipeline: Single vs. Multiple
+## Pipeline Strategy: Single vs. Multiple
 
-### Когда использовать один Pipeline
+### When to Use a Single Pipeline
 
-Один pipeline часто достаточен, когда:
+A single pipeline is often sufficient when:
 
-1. **Common Processing Flow**: Ваше приложение обрабатывает вариации одного и того же базового рабочего процесса:
+1. **Common Processing Flow**: Your application handles variations of the same basic workflow:
 ```python
 class ContentPipeline(Pipeline):
     pipeline_schema = PipelineSchema(
@@ -291,7 +291,7 @@ class ContentPipeline(Pipeline):
     )
 ```
 
-2. **Branching Logic**: Когда различия могут быть обработаны через маршрутизацию:
+2. **Branching Logic**: When differences can be handled through routing:
 ```python
 class RouterNode(BaseRouter):
     def determine_next_node(self, context: TaskContext) -> Node:
@@ -303,7 +303,7 @@ class RouterNode(BaseRouter):
         }.get(content_type, TextAnalysisNode())
 ```
 
-3. **Shared Context**: Когда разные процессы нуждаются в доступе к одному и тому же контексту:
+3. **Shared Context**: When different processes need access to the same context:
 ```python
 class EnrichmentNode(Node):
     def process(self, context: TaskContext) -> TaskContext:
@@ -315,11 +315,11 @@ class EnrichmentNode(Node):
         return context
 ```
 
-### Когда использовать несколько Pipeline
+### When to Use Multiple Pipelines
 
-Рассмотрите вариант использования несколько pipeline, когда:
+Consider using multiple pipelines when:
 
-1. **Разные бизнес-домены**:
+1. **Different Business Domains**:
 ```python
 class CustomerSupportPipeline(Pipeline):
     # Handle customer inquiries
@@ -330,7 +330,7 @@ class ContentModerationPipeline(Pipeline):
     pipeline_schema = PipelineSchema(...)
 ```
 
-2. **Разные требования к безопасности**:
+2. **Different Security Requirements**:
 ```python
 class PublicPipeline(Pipeline):
     # Public-facing processing
@@ -341,7 +341,7 @@ class InternalPipeline(Pipeline):
     pipeline_schema = PipelineSchema(...)
 ```
 
-3. **Совершенно разные рабочие процессы**:
+3. **Completely Different Workflows**:
 ```python
 class DocumentProcessingPipeline(Pipeline):
     # Document-specific workflow
@@ -364,9 +364,9 @@ class ChatPipeline(Pipeline):
     )
 ```
 
-### Гибридный подход
+### Hybrid Approach
 
-Вы можете также использовать гибридный подход, когда у вас несколько pipeline, которые разделяют общие компоненты:
+You can also use a hybrid approach where you have multiple pipelines that share common components:
 
 ```python
 # Shared nodes module
@@ -396,24 +396,24 @@ class Pipeline2(Pipeline):
     )
 ```
 
-### Фреймворк принятия решений
+### Decision Framework
 
-При принятии решения о структуре pipeline, рассмотрите:
+When deciding on pipeline structure, consider:
 
-1. **Управление сложностью**:
-   - Single Pipeline: Когда вариации минимальны
-   - Multiple Pipelines: Когда сложность становится трудно управляемой в одном pipeline
+1. **Complexity Management**:
+   - Single Pipeline: When variations are minimal
+   - Multiple Pipelines: When complexity becomes difficult to manage in one pipeline
 
-2. **Обслуживание**:
-   - Single Pipeline: Проще поддерживать, когда логика связана
-   - Multiple Pipelines: Лучше, когда разные команды управляют разными рабочими процессами
+2. **Maintenance**:
+   - Single Pipeline: Easier to maintain when logic is related
+   - Multiple Pipelines: Better when different teams manage different workflows
 
-3. **Производительность**:
-   - Single Pipeline: Можно оптимизировать общие ресурсы
-   - Multiple Pipelines: Можно масштабировать разные рабочие процессы независимо
+3. **Performance**:
+   - Single Pipeline: Can optimize shared resources
+   - Multiple Pipelines: Can scale different workflows independently
 
-4. **Безопасность**:
-   - Single Pipeline: Когда контекст безопасности единообразен
-   - Multiple Pipelines: Когда требуются разные контексты безопасности
+4. **Security**:
+   - Single Pipeline: When security context is uniform
+   - Multiple Pipelines: When different security contexts are required
 
-Помните: Начинайте с одного pipeline и разделяйте только при необходимости. Проще разделить pipeline позже, чем объединить несколько pipeline.
+Remember: Start with a single pipeline and split only when necessary. It's easier to split a pipeline later than to merge multiple pipelines. 
