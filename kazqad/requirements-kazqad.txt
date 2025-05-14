@@ -1,0 +1,10 @@
+#datasets: Работа с датасетами Hugging Face
+datasets>=2.19.1
+#rank-bm25: Алгоритм ранжирования текстов
+rank-bm25>=0.2.2
+#numpy: Математические операции
+numpy>=1.26.4
+#huggingface-hub: Взаимодействие с Hugging Face
+huggingface-hub>=0.23.5
+#pytest: Тестирование
+pytest>=8.3.2

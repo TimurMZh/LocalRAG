@@ -1,0 +1,155 @@
+2025-03-27 08:12:46,864 - __main__ - INFO - Initializing KazQADRetrieval with dataset: issai/kazqad-retrieval
+2025-03-27 08:12:52,806 - __main__ - INFO - Dataset loaded successfully: issai/kazqad-retrieval
+2025-03-27 08:12:52,806 - __main__ - INFO - Processing 'train' split
+2025-03-27 08:12:52,946 - __main__ - INFO - Processing 'validation' split
+2025-03-27 08:12:52,969 - __main__ - INFO - Processing 'test' split
+2025-03-27 08:12:53,046 - __main__ - INFO - Extracted 7278 unique passages
+2025-03-27 08:12:53,328 - __main__ - INFO - Cleaned passages statistics: 52 too short, 84 without Kazakh chars, 1748 truncated due to length
+2025-03-27 08:12:53,328 - __main__ - INFO - After cleaning: 7142 passages
+2025-03-27 08:12:53,330 - __main__ - INFO - Extracted 7142 passages from dataset
+2025-03-27 08:12:54,307 - __main__ - INFO - Tokenized 7142 passages
+2025-03-27 08:12:54,520 - __main__ - INFO - Using BM25Plus ranking algorithm
+2025-03-27 08:12:54,656 - __main__ - INFO - Built inverted index with 83699 unique tokens
+2025-03-27 08:12:54,656 - __main__ - INFO - Initialization completed in 7.79 seconds
+2025-03-27 08:12:54,662 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:12:54,662 - __main__ - INFO - Filtered candidates from 7142 to 659
+2025-03-27 08:12:54,683 - __main__ - INFO - Found 0 passages in 0.025 seconds
+2025-03-27 08:12:54,685 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:12:54,685 - __main__ - INFO - Filtered candidates from 7142 to 86
+2025-03-27 08:12:54,689 - __main__ - INFO - Found 0 passages in 0.005 seconds
+2025-03-27 08:12:54,689 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:12:54,690 - __main__ - INFO - Filtered candidates from 7142 to 695
+2025-03-27 08:12:54,710 - __main__ - INFO - Found 0 passages in 0.021 seconds
+2025-03-27 08:12:54,712 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:12:54,712 - __main__ - INFO - Filtered candidates from 7142 to 326
+2025-03-27 08:12:54,722 - __main__ - INFO - Found 0 passages in 0.011 seconds
+2025-03-27 08:12:54,723 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:12:54,723 - __main__ - INFO - Filtered candidates from 7142 to 648
+2025-03-27 08:12:54,748 - __main__ - INFO - Found 0 passages in 0.026 seconds
+2025-03-27 08:16:07,452 - __main__ - INFO - Initializing KazQADRetrieval with dataset: issai/kazqad-retrieval
+2025-03-27 08:16:13,417 - __main__ - INFO - Dataset loaded successfully: issai/kazqad-retrieval
+2025-03-27 08:16:13,417 - __main__ - INFO - Processing 'train' split
+2025-03-27 08:16:13,585 - __main__ - INFO - Processing 'validation' split
+2025-03-27 08:16:13,609 - __main__ - INFO - Processing 'test' split
+2025-03-27 08:16:13,689 - __main__ - INFO - Extracted 7278 unique passages
+2025-03-27 08:16:13,973 - __main__ - INFO - Cleaned passages statistics: 52 too short, 84 without Kazakh chars, 1748 truncated due to length
+2025-03-27 08:16:13,973 - __main__ - INFO - After cleaning: 7142 passages
+2025-03-27 08:16:13,975 - __main__ - INFO - Extracted 7142 passages from dataset
+2025-03-27 08:16:14,949 - __main__ - INFO - Tokenized 7142 passages
+2025-03-27 08:16:15,156 - __main__ - INFO - Using BM25Plus ranking algorithm
+2025-03-27 08:16:15,293 - __main__ - INFO - Built inverted index with 83699 unique tokens
+2025-03-27 08:16:15,293 - __main__ - INFO - Initialization completed in 7.84 seconds
+2025-03-27 08:16:15,295 - __main__ - INFO - Retrieving passages for query: Қазақстан тарихы
+2025-03-27 08:16:15,296 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:16:15,296 - __main__ - INFO - Filtered candidates from 7142 to 659
+2025-03-27 08:16:15,317 - __main__ - INFO - Top 5 scores: [np.float64(4.748143164342119), np.float64(4.629872805087761), np.float64(4.569244617953588), np.float64(4.487762899847371), np.float64(4.484318128375057)]
+2025-03-27 08:16:15,317 - __main__ - INFO - Found 5 passages in 0.022 seconds
+2025-03-27 08:16:15,318 - __main__ - INFO - Retrieving passages for query: Абай Құнанбаев
+2025-03-27 08:16:15,318 - __main__ - INFO - Cache hit for query: Абай Құнанбаев
+2025-03-27 08:16:15,318 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:16:15,318 - __main__ - INFO - Filtered candidates from 7142 to 86
+2025-03-27 08:16:15,322 - __main__ - INFO - Top 5 scores: [np.float64(6.05797331545674), np.float64(5.391892127982893), np.float64(5.045647618807109), np.float64(5.036167998874637), np.float64(4.9762333380870505)]
+2025-03-27 08:16:15,322 - __main__ - INFO - Found 5 passages in 0.004 seconds
+2025-03-27 08:16:15,322 - __main__ - INFO - Retrieving passages for query: Қазақстан астанасы
+2025-03-27 08:16:15,322 - __main__ - INFO - Cache hit for query: Қазақстан астанасы
+2025-03-27 08:16:15,322 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:16:15,322 - __main__ - INFO - Filtered candidates from 7142 to 695
+2025-03-27 08:16:15,342 - __main__ - INFO - Top 5 scores: [np.float64(4.7044456311730825), np.float64(4.456049073111624), np.float64(4.400829340650839), np.float64(4.332671374278225), np.float64(4.332074857333376)]
+2025-03-27 08:16:15,343 - __main__ - INFO - Found 5 passages in 0.021 seconds
+2025-03-27 08:16:15,343 - __main__ - INFO - Retrieving passages for query: Алматы қаласы
+2025-03-27 08:16:15,344 - __main__ - INFO - Cache hit for query: Алматы қаласы
+2025-03-27 08:16:15,344 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:16:15,344 - __main__ - INFO - Filtered candidates from 7142 to 326
+2025-03-27 08:16:15,352 - __main__ - INFO - Top 5 scores: [np.float64(3.4201318684031485), np.float64(3.313464326831145), np.float64(3.2016824481330435), np.float64(3.090002884262121), np.float64(3.0683644749588845)]
+2025-03-27 08:16:15,352 - __main__ - INFO - Found 5 passages in 0.010 seconds
+2025-03-27 08:16:15,353 - __main__ - INFO - Retrieving passages for query: Қазақ әдебиеті
+2025-03-27 08:16:15,353 - __main__ - INFO - Cache hit for query: Қазақ әдебиеті
+2025-03-27 08:16:15,353 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:16:15,353 - __main__ - INFO - Filtered candidates from 7142 to 648
+2025-03-27 08:16:15,376 - __main__ - INFO - Top 5 scores: [np.float64(7.093192076679444), np.float64(6.713415092386472), np.float64(6.626418243838974), np.float64(6.2237943417832335), np.float64(6.1511873688944245)]
+2025-03-27 08:16:15,376 - __main__ - INFO - Found 5 passages in 0.023 seconds
+2025-03-27 08:21:11,174 - __main__ - INFO - Initializing KazQADRetrieval with dataset: issai/kazqad-retrieval
+2025-03-27 08:21:16,770 - __main__ - INFO - Dataset loaded successfully: issai/kazqad-retrieval
+2025-03-27 08:21:16,770 - __main__ - INFO - Processing 'train' split
+2025-03-27 08:21:16,912 - __main__ - INFO - Processing 'validation' split
+2025-03-27 08:21:16,935 - __main__ - INFO - Processing 'test' split
+2025-03-27 08:21:17,013 - __main__ - INFO - Extracted 7278 unique passages
+2025-03-27 08:21:17,296 - __main__ - INFO - Cleaned passages statistics: 52 too short, 84 without Kazakh chars, 1748 truncated due to length
+2025-03-27 08:21:17,297 - __main__ - INFO - After cleaning: 7142 passages
+2025-03-27 08:21:17,299 - __main__ - INFO - Extracted 7142 passages from dataset
+2025-03-27 08:21:18,259 - __main__ - INFO - Tokenized 7142 passages
+2025-03-27 08:21:18,467 - __main__ - INFO - Using BM25Plus ranking algorithm
+2025-03-27 08:21:18,607 - __main__ - INFO - Built inverted index with 83699 unique tokens
+2025-03-27 08:21:18,607 - __main__ - INFO - Initialization completed in 7.43 seconds
+2025-03-27 08:21:18,610 - __main__ - INFO - Retrieving passages for query: Қазақстан тарихы
+2025-03-27 08:21:18,610 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:21:18,611 - __main__ - INFO - Filtered candidates from 7142 to 659
+2025-03-27 08:21:18,633 - __main__ - INFO - Top 5 scores: [np.float64(4.748143164342119), np.float64(4.629872805087761), np.float64(4.569244617953588), np.float64(4.487762899847371), np.float64(4.484318128375057)]
+2025-03-27 08:21:18,634 - __main__ - INFO - Found 5 passages in 0.023 seconds
+2025-03-27 08:21:18,635 - __main__ - INFO - Retrieving passages for query: Абай Құнанбаев
+2025-03-27 08:21:18,636 - __main__ - INFO - Cache hit for query: Абай Құнанбаев
+2025-03-27 08:21:18,636 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:21:18,637 - __main__ - INFO - Filtered candidates from 7142 to 86
+2025-03-27 08:21:18,641 - __main__ - INFO - Top 5 scores: [np.float64(6.05797331545674), np.float64(5.391892127982893), np.float64(5.045647618807109), np.float64(5.036167998874637), np.float64(4.9762333380870505)]
+2025-03-27 08:21:18,641 - __main__ - INFO - Found 5 passages in 0.006 seconds
+2025-03-27 08:21:18,642 - __main__ - INFO - Retrieving passages for query: Қазақстан астанасы
+2025-03-27 08:21:18,642 - __main__ - INFO - Cache hit for query: Қазақстан астанасы
+2025-03-27 08:21:18,643 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:21:18,643 - __main__ - INFO - Filtered candidates from 7142 to 695
+2025-03-27 08:21:18,664 - __main__ - INFO - Top 5 scores: [np.float64(4.7044456311730825), np.float64(4.456049073111624), np.float64(4.400829340650839), np.float64(4.332671374278225), np.float64(4.332074857333376)]
+2025-03-27 08:21:18,665 - __main__ - INFO - Found 5 passages in 0.023 seconds
+2025-03-27 08:21:18,666 - __main__ - INFO - Retrieving passages for query: Алматы қаласы
+2025-03-27 08:21:18,667 - __main__ - INFO - Cache hit for query: Алматы қаласы
+2025-03-27 08:21:18,667 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:21:18,667 - __main__ - INFO - Filtered candidates from 7142 to 326
+2025-03-27 08:21:18,678 - __main__ - INFO - Top 5 scores: [np.float64(3.4201318684031485), np.float64(3.313464326831145), np.float64(3.2016824481330435), np.float64(3.090002884262121), np.float64(3.0683644749588845)]
+2025-03-27 08:21:18,678 - __main__ - INFO - Found 5 passages in 0.012 seconds
+2025-03-27 08:21:18,679 - __main__ - INFO - Retrieving passages for query: Қазақ әдебиеті
+2025-03-27 08:21:18,679 - __main__ - INFO - Cache hit for query: Қазақ әдебиеті
+2025-03-27 08:21:18,679 - __main__ - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:21:18,679 - __main__ - INFO - Filtered candidates from 7142 to 648
+2025-03-27 08:21:18,702 - __main__ - INFO - Top 5 scores: [np.float64(7.093192076679444), np.float64(6.713415092386472), np.float64(6.626418243838974), np.float64(6.2237943417832335), np.float64(6.1511873688944245)]
+2025-03-27 08:21:18,702 - __main__ - INFO - Found 5 passages in 0.023 seconds
+2025-03-27 08:21:35,654 - kazqad_retrieval - INFO - Initializing KazQADRetrieval with dataset: issai/kazqad-retrieval
+2025-03-27 08:21:41,812 - kazqad_retrieval - INFO - Dataset loaded successfully: issai/kazqad-retrieval
+2025-03-27 08:21:41,813 - kazqad_retrieval - INFO - Processing 'train' split
+2025-03-27 08:21:41,956 - kazqad_retrieval - INFO - Processing 'validation' split
+2025-03-27 08:21:41,981 - kazqad_retrieval - INFO - Processing 'test' split
+2025-03-27 08:21:42,061 - kazqad_retrieval - INFO - Extracted 7278 unique passages
+2025-03-27 08:21:42,343 - kazqad_retrieval - INFO - Cleaned passages statistics: 52 too short, 84 without Kazakh chars, 1748 truncated due to length
+2025-03-27 08:21:42,344 - kazqad_retrieval - INFO - After cleaning: 7142 passages
+2025-03-27 08:21:42,346 - kazqad_retrieval - INFO - Extracted 7142 passages from dataset
+2025-03-27 08:21:43,312 - kazqad_retrieval - INFO - Tokenized 7142 passages
+2025-03-27 08:21:43,527 - kazqad_retrieval - INFO - Using BM25Plus ranking algorithm
+2025-03-27 08:21:43,663 - kazqad_retrieval - INFO - Built inverted index with 83699 unique tokens
+2025-03-27 08:21:43,664 - kazqad_retrieval - INFO - Initialization completed in 8.01 seconds
+2025-03-27 08:21:43,665 - kazqad_retrieval - INFO - Retrieving passages for query: Қазақстан тарихы
+2025-03-27 08:21:43,666 - kazqad_retrieval - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:21:43,666 - kazqad_retrieval - INFO - Filtered candidates from 7142 to 659
+2025-03-27 08:21:43,690 - kazqad_retrieval - INFO - Top 5 scores: [np.float64(4.748143164342119), np.float64(4.629872805087761), np.float64(4.569244617953588), np.float64(4.487762899847371), np.float64(4.484318128375057)]
+2025-03-27 08:21:43,691 - kazqad_retrieval - INFO - Found 5 passages in 0.026 seconds
+2025-03-27 08:21:43,694 - kazqad_retrieval - INFO - Retrieving passages for query: Қазақстан тарихы
+2025-03-27 08:21:43,695 - kazqad_retrieval - INFO - Cache hit for query: Қазақстан тарихы
+2025-03-27 08:21:43,695 - kazqad_retrieval - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:21:43,695 - kazqad_retrieval - INFO - Filtered candidates from 7142 to 659
+2025-03-27 08:21:43,716 - kazqad_retrieval - INFO - Top 5 scores: [np.float64(4.748143164342119), np.float64(4.629872805087761), np.float64(4.569244617953588), np.float64(4.487762899847371), np.float64(4.484318128375057)]
+2025-03-27 08:21:43,717 - kazqad_retrieval - INFO - Found 5 passages in 0.023 seconds
+2025-03-27 08:21:43,718 - kazqad_retrieval - INFO - Retrieving passages for query: 
+2025-03-27 08:21:43,718 - kazqad_retrieval - WARNING - Empty query received
+2025-03-27 08:21:43,719 - kazqad_retrieval - INFO - Retrieving passages for query:    
+2025-03-27 08:21:43,719 - kazqad_retrieval - WARNING - Empty query received
+2025-03-27 08:21:43,720 - kazqad_retrieval - INFO - Retrieving passages for query: Қазақстан тарихы
+2025-03-27 08:21:43,720 - kazqad_retrieval - INFO - Expanded query from 2 to 2 tokens
+2025-03-27 08:21:43,720 - kazqad_retrieval - INFO - Filtered candidates from 7142 to 659
+2025-03-27 08:21:43,742 - kazqad_retrieval - INFO - Top 5 scores: [np.float64(4.748143164342119), np.float64(4.629872805087761), np.float64(4.569244617953588), np.float64(4.487762899847371), np.float64(4.484318128375057)]
+2025-03-27 08:21:43,742 - kazqad_retrieval - INFO - Found 5 passages in 0.022 seconds
+2025-03-27 08:21:43,744 - kazqad_retrieval - INFO - Retrieving passages for query: Қазақстан
+2025-03-27 08:21:43,744 - kazqad_retrieval - INFO - Expanded query from 1 to 1 tokens
+2025-03-27 08:21:43,744 - kazqad_retrieval - INFO - Filtered candidates from 7142 to 553
+2025-03-27 08:21:43,762 - kazqad_retrieval - INFO - Top 5 scores: [np.float64(0.005862964339717579), np.float64(0.005801852131522893), np.float64(0.005592848009373475), np.float64(0.005569056185734659), np.float64(0.005513330142596758)]
+2025-03-27 08:21:43,763 - kazqad_retrieval - INFO - Found 0 passages in 0.019 seconds
+2025-03-27 08:21:43,764 - kazqad_retrieval - INFO - Retrieving passages for query: Қазақстан
+2025-03-27 08:21:43,765 - kazqad_retrieval - INFO - Expanded query from 1 to 1 tokens
+2025-03-27 08:21:43,765 - kazqad_retrieval - INFO - Filtered candidates from 7142 to 553
+2025-03-27 08:21:43,784 - kazqad_retrieval - INFO - Top 5 scores: [np.float64(0.005862964339717579), np.float64(0.005801852131522893), np.float64(0.005592848009373475), np.float64(0.005569056185734659), np.float64(0.005513330142596758)]
+2025-03-27 08:21:43,785 - kazqad_retrieval - INFO - Found 0 passages in 0.020 seconds
